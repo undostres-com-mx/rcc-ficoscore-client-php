@@ -1,5 +1,5 @@
 {
-    "name": "/",
+    "name": "rcc-ficoscore-client-php",
     "description": "",
     "keywords": [
         "apihub",
@@ -7,12 +7,12 @@
         "sdk",
         "api"
     ],
-    "homepage": "http://apihub.io",
+    "homepage": "https://developer.circulodecredito.com.mx",
     "license": "proprietary",
     "authors": [
         {
             "name": "APIHub and contributors",
-            "homepage": "https://github.com/apihub-api/apihub-codegen"
+            "homepage": "https://github.com/APIHub-CdC"
         }
     ],
     "require": {
