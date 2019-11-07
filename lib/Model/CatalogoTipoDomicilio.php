@@ -1,7 +1,7 @@
 <?php
 
-namespace APIHub\Client\Model;
-use \APIHub\Client\ObjectSerializer;
+namespace RCCFicoScore\Client\Model;
+use \RCCFicoScore\Client\ObjectSerializer;
 
 class CatalogoTipoDomicilio
 {

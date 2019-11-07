@@ -1,9 +1,9 @@
 <?php
 
-namespace APIHub\Client\Model;
+namespace RCCFicoScore\Client\Model;
 
 use \ArrayAccess;
-use \APIHub\Client\ObjectSerializer;
+use \RCCFicoScore\Client\ObjectSerializer;
 
 class Domicilio implements ModelInterface, ArrayAccess
 {
@@ -16,12 +16,12 @@ class Domicilio implements ModelInterface, ArrayAccess
         'colonia' => 'string',
         'municipio' => 'string',
         'ciudad' => 'string',
-        'estado' => '\APIHub\Client\Model\CatalogoEstados',
+        'estado' => '\RCCFicoScore\Client\Model\CatalogoEstados',
         'codigo_postal' => 'string',
         'fecha_residencia' => 'string',
         'numero_telefono' => 'string',
-        'tipo_domicilio' => '\APIHub\Client\Model\CatalogoTipoDomicilio',
-        'tipo_asentamiento' => '\APIHub\Client\Model\CatalogoTipoAsentamiento'
+        'tipo_domicilio' => '\RCCFicoScore\Client\Model\CatalogoTipoDomicilio',
+        'tipo_asentamiento' => '\RCCFicoScore\Client\Model\CatalogoTipoAsentamiento'
     ];
     
     protected static $apihubFormats = [

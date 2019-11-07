@@ -1,9 +1,9 @@
 <?php
 
-namespace APIHub\Client\Model;
+namespace RCCFicoScore\Client\Model;
 
 use \ArrayAccess;
-use \APIHub\Client\ObjectSerializer;
+use \RCCFicoScore\Client\ObjectSerializer;
 
 class Empleo implements ModelInterface, ArrayAccess
 {
@@ -17,14 +17,14 @@ class Empleo implements ModelInterface, ArrayAccess
         'colonia' => 'string',
         'municipio' => 'string',
         'ciudad' => 'string',
-        'estado' => '\APIHub\Client\Model\CatalogoEstados',
+        'estado' => '\RCCFicoScore\Client\Model\CatalogoEstados',
         'codigo_postal' => 'string',
         'numero_telefono' => 'string',
         'extension' => 'string',
         'fax' => 'string',
         'puesto' => 'string',
         'fecha_contratacion' => 'string',
-        'clave_moneda' => '\APIHub\Client\Model\CatalogoMoneda',
+        'clave_moneda' => '\RCCFicoScore\Client\Model\CatalogoMoneda',
         'salario_mensual' => 'string',
         'fecha_ultimo_dia_empleo' => 'string',
         'fecha_verificacion_empleo' => 'string'

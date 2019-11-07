@@ -1,6 +1,6 @@
 <?php
 
-namespace APIHub\Client;
+namespace RCCFicoScore\Client;
 
 use \Exception;
 

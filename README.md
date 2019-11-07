@@ -85,7 +85,7 @@ openssl pkcs12 -name ${ALIAS} \
 - En caso de que no se almacene así, se debe especificar la ruta donde se encuentra el contenedor y el certificado. Ver el siguiente ejemplo:
 ```php
 $password = getenv('KEY_PASSWORD');
-$this->signer = new \APIHub\Client\Interceptor\KeyHandler(
+$this->signer = new \RCCFicoScore\Client\Interceptor\KeyHandler(
     "/example/route/keypair.p12",
     "/example/route/cdc_cert.pem",
     $password
@@ -93,9 +93,10 @@ $this->signer = new \APIHub\Client\Interceptor\KeyHandler(
 ```
  > **NOTA:** Sólamente en caso de que el contenedor haya cifrado, se debe colocar la contraseña en una variable de ambiente e indicar el nombre de la misma, como se ve en la imagen anterior.
 ### Paso 4. Modificar URL
- Modificar la URL de la petición en ***lib/Configuration.php*** en la línea 19, como se muestra en el siguiente fragmento de código:
+ Modificar la URL de la petición en ***test/Api/ReporteDeCrditoConFicoScoreApiTest.php*** en la línea 29, como se muestra en el siguiente fragmento de código:
  ```php
- protected $host = 'the_url';
+ $config = new \RCCFicoScore\Client\Configuration();
+ $config->setHost('the_url');
  ```
 ### Paso 5. Capturar los datos de la petición
 
@@ -105,7 +106,19 @@ Es importante contar con el setUp() que se encargará de firmar y verificar la p
 public function setUp()
 {
     $password = getenv('KEY_PASSWORD');
-    $this->signer = new \APIHub\Client\Interceptor\KeyHandler(null, null, $password);
+    $this->signer = new \RCCFicoScore\Client\Interceptor\KeyHandler(null, null, $password);
+    $events = new \RCCFicoScore\Client\Interceptor\MiddlewareEvents($this->signer);
+    $handler = handlerStack::create();
+    $handler->push($events->add_signature_header('x-signature'));
+    $handler->push($events->verify_signature_header('x-signature'));
+    $client = new \GuzzleHttp\Client(['handler' => $handler]);
+
+    $config = new \RCCFicoScore\Client\Configuration();
+    $config->setHost('the_url');
+    $this->apiInstance = new \RCCFicoScore\Client\Api\ReporteDeCrditoConFicoScoreApi($client, $config);
+    $this->x_api_key = "your_api_key";
+    $this->username = "your_username";
+    $this->password = "your_password";
 }    
 ```
 ```php
@@ -114,23 +127,22 @@ public function setUp()
 public function testGetReporte()
     {
 
-        $events = new \APIHub\Client\Interceptor\MiddlewareEvents($this->signer);
+        $events = new \RCCFicoScore\Client\Interceptor\MiddlewareEvents($this->signer);
         $handler = handlerStack::create();    
         $handler->push($events->add_signature_header('x-signature'));
-
         $handler->push($events->verify_signature_header('x-signature'));
         $client = new \GuzzleHttp\Client([
             'handler' => $handler,
             'verify' => false
         ]); 
 
-        $this->apiInstance = new \APIHub\Client\Api\ReporteDeCrditoApi($client);
+        $this->apiInstance = new \RCCFicoScore\Client\Api\ReporteDeCrditoApi($client);
 
         $x_api_key = "your_api_key";
         $username = "your_username";
         $password = "your_password";
 
-        $request = new \APIHub\Client\Model\PersonaPeticion();
+        $request = new \RCCFicoScore\Client\Model\PersonaPeticion();
         $request->setPrimerNombre("XXXXXXXXXX");
         $request->setSegundoNombre(null);
         $request->setApellidoPaterno("XXXXXXXXXX");
@@ -140,7 +152,7 @@ public function testGetReporte()
         $request->setRfc("XXXXXXXXXX");
         $request->setCurp(null);
 
-        $domicilio = new \APIHub\Client\Model\Domicilio();
+        $domicilio = new \RCCFicoScore\Client\Model\Domicilio();
         $domicilio->setDireccion("XXXXXXXXXX");
         $domicilio->setColonia("XXXXXXXXXX");
         $domicilio->setCiudad("XXXXXXXXXX");
