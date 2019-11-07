@@ -1,12 +1,12 @@
 <?php
     
-namespace APIHub\Client\Interceptor;
+namespace RCCFicoScore\Client\Interceptor;
 
 use \Monolog\Logger;
 use \Monolog\Formatter\LineFormatter;
 use \Monolog\Handler\StreamHandler;
 
-use \APIHub\Client\Interceptor\MyLogger;
+use \RCCFicoScore\Client\Interceptor\MyLogger;
 
 Class KeyHandler{
 

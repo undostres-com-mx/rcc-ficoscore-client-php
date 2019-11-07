@@ -1,9 +1,9 @@
 <?php
 
-namespace APIHub\Client\Model;
+namespace RCCFicoScore\Client\Model;
 
 use \ArrayAccess;
-use \APIHub\Client\ObjectSerializer;
+use \RCCFicoScore\Client\ObjectSerializer;
 
 class Consulta implements ModelInterface, ArrayAccess
 {
@@ -19,8 +19,8 @@ class Consulta implements ModelInterface, ArrayAccess
         'telefono_otorgante' => 'string',
         'tipo_credito' => 'string',
         'importe_credito' => 'string',
-        'tipo_responsabilidad' => '\APIHub\Client\Model\CatalogoTipoResponsabilidad',
-        'clave_unidad_monetaria' => '\APIHub\Client\Model\CatalogoMoneda',
+        'tipo_responsabilidad' => '\RCCFicoScore\Client\Model\CatalogoTipoResponsabilidad',
+        'clave_unidad_monetaria' => '\RCCFicoScore\Client\Model\CatalogoMoneda',
         'id_domicilio' => 'string',
         'servicios' => 'string'
     ];

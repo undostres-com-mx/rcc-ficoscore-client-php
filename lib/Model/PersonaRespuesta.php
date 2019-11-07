@@ -1,9 +1,9 @@
 <?php
 
-namespace APIHub\Client\Model;
+namespace RCCFicoScore\Client\Model;
 
 use \ArrayAccess;
-use \APIHub\Client\ObjectSerializer;
+use \RCCFicoScore\Client\ObjectSerializer;
 
 class PersonaRespuesta implements ModelInterface, ArrayAccess
 {
@@ -21,13 +21,13 @@ class PersonaRespuesta implements ModelInterface, ArrayAccess
         'curp' => 'string',
         'numero_seguridad_social' => 'string',
         'nacionalidad' => 'string',
-        'residencia' => '\APIHub\Client\Model\CatalogoResidencia',
-        'estado_civil' => '\APIHub\Client\Model\CatalogoEstadoCivil',
-        'sexo' => '\APIHub\Client\Model\CatalogoSexo',
+        'residencia' => '\RCCFicoScore\Client\Model\CatalogoResidencia',
+        'estado_civil' => '\RCCFicoScore\Client\Model\CatalogoEstadoCivil',
+        'sexo' => '\RCCFicoScore\Client\Model\CatalogoSexo',
         'clave_elector' => 'string',
         'numero_dependientes' => 'string',
         'fecha_defuncion' => 'string',
-        'domicilio' => '\APIHub\Client\Model\Domicilio'
+        'domicilio' => '\RCCFicoScore\Client\Model\Domicilio'
     ];
     
     protected static $apihubFormats = [

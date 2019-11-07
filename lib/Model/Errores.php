@@ -1,9 +1,9 @@
 <?php
 
-namespace APIHub\Client\Model;
+namespace RCCFicoScore\Client\Model;
 
 use \ArrayAccess;
-use \APIHub\Client\ObjectSerializer;
+use \RCCFicoScore\Client\ObjectSerializer;
 
 class Errores implements ModelInterface, ArrayAccess
 {
@@ -12,7 +12,7 @@ class Errores implements ModelInterface, ArrayAccess
     protected static $apihubModelName = 'Errores';
     
     protected static $apihubTypes = [
-        'errores' => '\APIHub\Client\Model\Error[]'
+        'errores' => '\RCCFicoScore\Client\Model\Error[]'
     ];
     
     protected static $apihubFormats = [

@@ -1,9 +1,9 @@
 <?php
 
-namespace APIHub\Client\Model;
+namespace RCCFicoScore\Client\Model;
 
 use \ArrayAccess;
-use \APIHub\Client\ObjectSerializer;
+use \RCCFicoScore\Client\ObjectSerializer;
 
 class Credito implements ModelInterface, ArrayAccess
 {
@@ -17,13 +17,13 @@ class Credito implements ModelInterface, ArrayAccess
         'clave_otorgante' => 'string',
         'nombre_otorgante' => 'string',
         'cuenta_actual' => 'string',
-        'tipo_responsabilidad' => '\APIHub\Client\Model\CatalogoTipoResponsabilidad',
-        'tipo_cuenta' => '\APIHub\Client\Model\CatalogoTipoCuenta',
-        'tipo_credito' => '\APIHub\Client\Model\CatalogoTipoCredito',
-        'clave_unidad_monetaria' => '\APIHub\Client\Model\CatalogoMoneda',
+        'tipo_responsabilidad' => '\RCCFicoScore\Client\Model\CatalogoTipoResponsabilidad',
+        'tipo_cuenta' => '\RCCFicoScore\Client\Model\CatalogoTipoCuenta',
+        'tipo_credito' => '\RCCFicoScore\Client\Model\CatalogoTipoCredito',
+        'clave_unidad_monetaria' => '\RCCFicoScore\Client\Model\CatalogoMoneda',
         'valor_activo_valuacion' => 'string',
         'numero_pagos' => 'string',
-        'frecuencia_pagos' => '\APIHub\Client\Model\CatalogoFrecuenciaPago',
+        'frecuencia_pagos' => '\RCCFicoScore\Client\Model\CatalogoFrecuenciaPago',
         'monto_pagar' => 'string',
         'fecha_apertura_cuenta' => 'string',
         'fecha_ultimo_pago' => 'string',
@@ -41,7 +41,7 @@ class Credito implements ModelInterface, ArrayAccess
         'historico_pagos' => 'string',
         'fecha_reciente_historico_pagos' => 'string',
         'fecha_antigua_historico_pagos' => 'string',
-        'clave_prevencion' => '\APIHub\Client\Model\CatalogoPrevencion',
+        'clave_prevencion' => '\RCCFicoScore\Client\Model\CatalogoPrevencion',
         'total_pagos_reportados' => 'string',
         'peor_atraso' => 'string',
         'fecha_peor_atraso' => 'string',

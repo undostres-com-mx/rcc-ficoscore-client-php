@@ -1,9 +1,9 @@
 <?php
 
-namespace APIHub\Client\Model;
+namespace RCCFicoScore\Client\Model;
 
 use \ArrayAccess;
-use \APIHub\Client\ObjectSerializer;
+use \RCCFicoScore\Client\ObjectSerializer;
 
 class Razon implements ModelInterface, ArrayAccess
 {
@@ -12,7 +12,7 @@ class Razon implements ModelInterface, ArrayAccess
     protected static $apihubModelName = 'Razon';
     
     protected static $apihubTypes = [
-        'clave' => '\APIHub\Client\Model\CatalogoRazones',
+        'clave' => '\RCCFicoScore\Client\Model\CatalogoRazones',
         'descripcion' => 'string'
     ];
     

@@ -1,6 +1,6 @@
 <?php
 
-namespace APIHub\Client\Model;
+namespace RCCFicoScore\Client\Model;
 
 interface ModelInterface
 {

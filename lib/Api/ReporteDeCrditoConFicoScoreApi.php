@@ -1,6 +1,6 @@
 <?php
 
-namespace APIHub\Client\Api;
+namespace RCCFicoScore\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -8,10 +8,10 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use APIHub\Client\ApiException;
-use APIHub\Client\Configuration;
-use APIHub\Client\HeaderSelector;
-use APIHub\Client\ObjectSerializer;
+use RCCFicoScore\Client\ApiException;
+use RCCFicoScore\Client\Configuration;
+use RCCFicoScore\Client\HeaderSelector;
+use RCCFicoScore\Client\ObjectSerializer;
 
 class ReporteDeCrditoConFicoScoreApi
 {
@@ -45,7 +45,7 @@ class ReporteDeCrditoConFicoScoreApi
     
     public function getConsultasWithHttpInfo($folio_consulta, $x_api_key, $username, $password)
     {
-        $returnType = '\APIHub\Client\Model\Consultas';
+        $returnType = '\RCCFicoScore\Client\Model\Consultas';
         $request = $this->getConsultasRequest($folio_consulta, $x_api_key, $username, $password);
         try {
             $options = $this->createHttpClientOption();
@@ -91,7 +91,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Consultas',
+                        '\RCCFicoScore\Client\Model\Consultas',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -99,7 +99,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -107,7 +107,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -115,7 +115,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -123,7 +123,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -131,7 +131,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 410:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -139,7 +139,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -147,7 +147,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -169,7 +169,7 @@ class ReporteDeCrditoConFicoScoreApi
     
     public function getConsultasAsyncWithHttpInfo($folio_consulta, $x_api_key, $username, $password)
     {
-        $returnType = '\APIHub\Client\Model\Consultas';
+        $returnType = '\RCCFicoScore\Client\Model\Consultas';
         $request = $this->getConsultasRequest($folio_consulta, $x_api_key, $username, $password);
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -309,7 +309,7 @@ class ReporteDeCrditoConFicoScoreApi
     
     public function getCreditosWithHttpInfo($folio_consulta, $x_api_key, $username, $password)
     {
-        $returnType = '\APIHub\Client\Model\Creditos';
+        $returnType = '\RCCFicoScore\Client\Model\Creditos';
         $request = $this->getCreditosRequest($folio_consulta, $x_api_key, $username, $password);
         try {
             $options = $this->createHttpClientOption();
@@ -355,7 +355,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Creditos',
+                        '\RCCFicoScore\Client\Model\Creditos',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -363,7 +363,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -371,7 +371,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -379,7 +379,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -387,7 +387,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -395,7 +395,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 410:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -403,7 +403,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -411,7 +411,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -433,7 +433,7 @@ class ReporteDeCrditoConFicoScoreApi
     
     public function getCreditosAsyncWithHttpInfo($folio_consulta, $x_api_key, $username, $password)
     {
-        $returnType = '\APIHub\Client\Model\Creditos';
+        $returnType = '\RCCFicoScore\Client\Model\Creditos';
         $request = $this->getCreditosRequest($folio_consulta, $x_api_key, $username, $password);
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -573,7 +573,7 @@ class ReporteDeCrditoConFicoScoreApi
     
     public function getDomiciliosWithHttpInfo($folio_consulta, $x_api_key, $username, $password)
     {
-        $returnType = '\APIHub\Client\Model\Domicilios';
+        $returnType = '\RCCFicoScore\Client\Model\Domicilios';
         $request = $this->getDomiciliosRequest($folio_consulta, $x_api_key, $username, $password);
         try {
             $options = $this->createHttpClientOption();
@@ -619,7 +619,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Domicilios',
+                        '\RCCFicoScore\Client\Model\Domicilios',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -627,7 +627,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -635,7 +635,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -643,7 +643,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -651,7 +651,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -659,7 +659,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 410:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -667,7 +667,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -675,7 +675,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -697,7 +697,7 @@ class ReporteDeCrditoConFicoScoreApi
     
     public function getDomiciliosAsyncWithHttpInfo($folio_consulta, $x_api_key, $username, $password)
     {
-        $returnType = '\APIHub\Client\Model\Domicilios';
+        $returnType = '\RCCFicoScore\Client\Model\Domicilios';
         $request = $this->getDomiciliosRequest($folio_consulta, $x_api_key, $username, $password);
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -837,7 +837,7 @@ class ReporteDeCrditoConFicoScoreApi
     
     public function getEmpleosWithHttpInfo($folio_consulta, $x_api_key, $username, $password)
     {
-        $returnType = '\APIHub\Client\Model\Empleos';
+        $returnType = '\RCCFicoScore\Client\Model\Empleos';
         $request = $this->getEmpleosRequest($folio_consulta, $x_api_key, $username, $password);
         try {
             $options = $this->createHttpClientOption();
@@ -883,7 +883,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Empleos',
+                        '\RCCFicoScore\Client\Model\Empleos',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -891,7 +891,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -899,7 +899,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -907,7 +907,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -915,7 +915,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -923,7 +923,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 410:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -931,7 +931,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -939,7 +939,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -961,7 +961,7 @@ class ReporteDeCrditoConFicoScoreApi
     
     public function getEmpleosAsyncWithHttpInfo($folio_consulta, $x_api_key, $username, $password)
     {
-        $returnType = '\APIHub\Client\Model\Empleos';
+        $returnType = '\RCCFicoScore\Client\Model\Empleos';
         $request = $this->getEmpleosRequest($folio_consulta, $x_api_key, $username, $password);
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1101,7 +1101,7 @@ class ReporteDeCrditoConFicoScoreApi
     
     public function getReporteWithHttpInfo($x_api_key, $username, $password, $request, $x_full_report = 'false')
     {
-        $returnType = '\APIHub\Client\Model\Respuesta';
+        $returnType = '\RCCFicoScore\Client\Model\Respuesta';
         $request = $this->getReporteRequest($x_api_key, $username, $password, $request, $x_full_report);
         try {
             $options = $this->createHttpClientOption();
@@ -1148,7 +1148,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Respuesta',
+                        '\RCCFicoScore\Client\Model\Respuesta',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1156,7 +1156,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1164,7 +1164,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1172,7 +1172,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1180,7 +1180,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1188,7 +1188,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1196,7 +1196,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1218,7 +1218,7 @@ class ReporteDeCrditoConFicoScoreApi
     
     public function getReporteAsyncWithHttpInfo($x_api_key, $username, $password, $request, $x_full_report = 'false')
     {
-        $returnType = '\APIHub\Client\Model\Respuesta';
+        $returnType = '\RCCFicoScore\Client\Model\Respuesta';
         $request = $this->getReporteRequest($x_api_key, $username, $password, $request, $x_full_report);
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1357,7 +1357,7 @@ class ReporteDeCrditoConFicoScoreApi
     
     public function getScoresWithHttpInfo($folio_consulta, $x_api_key, $username, $password)
     {
-        $returnType = '\APIHub\Client\Model\Scores';
+        $returnType = '\RCCFicoScore\Client\Model\Scores';
         $request = $this->getScoresRequest($folio_consulta, $x_api_key, $username, $password);
         try {
             $options = $this->createHttpClientOption();
@@ -1403,7 +1403,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Scores',
+                        '\RCCFicoScore\Client\Model\Scores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1411,7 +1411,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1419,7 +1419,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1427,7 +1427,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1435,7 +1435,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1443,7 +1443,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 410:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1451,7 +1451,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1459,7 +1459,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\APIHub\Client\Model\Errores',
+                        '\RCCFicoScore\Client\Model\Errores',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1481,7 +1481,7 @@ class ReporteDeCrditoConFicoScoreApi
     
     public function getScoresAsyncWithHttpInfo($folio_consulta, $x_api_key, $username, $password)
     {
-        $returnType = '\APIHub\Client\Model\Scores';
+        $returnType = '\RCCFicoScore\Client\Model\Scores';
         $request = $this->getScoresRequest($folio_consulta, $x_api_key, $username, $password);
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
