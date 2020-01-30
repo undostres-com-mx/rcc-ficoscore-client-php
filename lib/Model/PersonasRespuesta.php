@@ -5,11 +5,11 @@ namespace RCCFicoScore\Client\Model;
 use \ArrayAccess;
 use \RCCFicoScore\Client\ObjectSerializer;
 
-class CatalogoErrores implements ModelInterface, ArrayAccess
+class PersonasRespuesta implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
     
-    protected static $apihubModelName = 'CatalogoErrores';
+    protected static $apihubModelName = 'PersonasRespuesta';
     
     protected static $apihubTypes = [
         

@@ -16,25 +16,25 @@ class Consulta implements ModelInterface, ArrayAccess
         'clave_otorgante' => 'string',
         'nombre_otorgante' => 'string',
         'direccion_otorgante' => 'string',
-        'telefono_otorgante' => 'string',
+        'telefono_otorgante' => 'int',
         'tipo_credito' => 'string',
-        'importe_credito' => 'string',
-        'tipo_responsabilidad' => '\RCCFicoScore\Client\Model\CatalogoTipoResponsabilidad',
         'clave_unidad_monetaria' => '\RCCFicoScore\Client\Model\CatalogoMoneda',
+        'importe_credito' => 'float',
+        'tipo_responsabilidad' => '\RCCFicoScore\Client\Model\CatalogoTipoResponsabilidad',
         'id_domicilio' => 'string',
         'servicios' => 'string'
     ];
     
     protected static $apihubFormats = [
-        'fecha_consulta' => null,
+        'fecha_consulta' => 'yyyy-MM-dd',
         'clave_otorgante' => null,
         'nombre_otorgante' => null,
         'direccion_otorgante' => null,
-        'telefono_otorgante' => null,
+        'telefono_otorgante' => 'int32',
         'tipo_credito' => null,
-        'importe_credito' => null,
-        'tipo_responsabilidad' => null,
         'clave_unidad_monetaria' => null,
+        'importe_credito' => 'float',
+        'tipo_responsabilidad' => null,
         'id_domicilio' => null,
         'servicios' => null
     ];
@@ -56,9 +56,9 @@ class Consulta implements ModelInterface, ArrayAccess
         'direccion_otorgante' => 'direccionOtorgante',
         'telefono_otorgante' => 'telefonoOtorgante',
         'tipo_credito' => 'tipoCredito',
+        'clave_unidad_monetaria' => 'claveUnidadMonetaria',
         'importe_credito' => 'importeCredito',
         'tipo_responsabilidad' => 'tipoResponsabilidad',
-        'clave_unidad_monetaria' => 'claveUnidadMonetaria',
         'id_domicilio' => 'idDomicilio',
         'servicios' => 'servicios'
     ];
@@ -70,9 +70,9 @@ class Consulta implements ModelInterface, ArrayAccess
         'direccion_otorgante' => 'setDireccionOtorgante',
         'telefono_otorgante' => 'setTelefonoOtorgante',
         'tipo_credito' => 'setTipoCredito',
+        'clave_unidad_monetaria' => 'setClaveUnidadMonetaria',
         'importe_credito' => 'setImporteCredito',
         'tipo_responsabilidad' => 'setTipoResponsabilidad',
-        'clave_unidad_monetaria' => 'setClaveUnidadMonetaria',
         'id_domicilio' => 'setIdDomicilio',
         'servicios' => 'setServicios'
     ];
@@ -84,9 +84,9 @@ class Consulta implements ModelInterface, ArrayAccess
         'direccion_otorgante' => 'getDireccionOtorgante',
         'telefono_otorgante' => 'getTelefonoOtorgante',
         'tipo_credito' => 'getTipoCredito',
+        'clave_unidad_monetaria' => 'getClaveUnidadMonetaria',
         'importe_credito' => 'getImporteCredito',
         'tipo_responsabilidad' => 'getTipoResponsabilidad',
-        'clave_unidad_monetaria' => 'getClaveUnidadMonetaria',
         'id_domicilio' => 'getIdDomicilio',
         'servicios' => 'getServicios'
     ];
@@ -110,7 +110,18 @@ class Consulta implements ModelInterface, ArrayAccess
     {
         return self::$apihubModelName;
     }
+    const SERVICIOS__0 = '0';
+    const SERVICIOS__1 = '1';
     
+    
+    
+    public function getServiciosAllowableValues()
+    {
+        return [
+            self::SERVICIOS__0,
+            self::SERVICIOS__1,
+        ];
+    }
     
     
     protected $container = [];
@@ -123,9 +134,9 @@ class Consulta implements ModelInterface, ArrayAccess
         $this->container['direccion_otorgante'] = isset($data['direccion_otorgante']) ? $data['direccion_otorgante'] : null;
         $this->container['telefono_otorgante'] = isset($data['telefono_otorgante']) ? $data['telefono_otorgante'] : null;
         $this->container['tipo_credito'] = isset($data['tipo_credito']) ? $data['tipo_credito'] : null;
+        $this->container['clave_unidad_monetaria'] = isset($data['clave_unidad_monetaria']) ? $data['clave_unidad_monetaria'] : null;
         $this->container['importe_credito'] = isset($data['importe_credito']) ? $data['importe_credito'] : null;
         $this->container['tipo_responsabilidad'] = isset($data['tipo_responsabilidad']) ? $data['tipo_responsabilidad'] : null;
-        $this->container['clave_unidad_monetaria'] = isset($data['clave_unidad_monetaria']) ? $data['clave_unidad_monetaria'] : null;
         $this->container['id_domicilio'] = isset($data['id_domicilio']) ? $data['id_domicilio'] : null;
         $this->container['servicios'] = isset($data['servicios']) ? $data['servicios'] : null;
     }
@@ -133,11 +144,42 @@ class Consulta implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+        if (!is_null($this->container['clave_otorgante']) && (mb_strlen($this->container['clave_otorgante']) > 10)) {
+            $invalidProperties[] = "invalid value for 'clave_otorgante', the character length must be smaller than or equal to 10.";
+        }
+        if (!is_null($this->container['clave_otorgante']) && (mb_strlen($this->container['clave_otorgante']) < 0)) {
+            $invalidProperties[] = "invalid value for 'clave_otorgante', the character length must be bigger than or equal to 0.";
+        }
+        if (!is_null($this->container['nombre_otorgante']) && (mb_strlen($this->container['nombre_otorgante']) > 40)) {
+            $invalidProperties[] = "invalid value for 'nombre_otorgante', the character length must be smaller than or equal to 40.";
+        }
+        if (!is_null($this->container['nombre_otorgante']) && (mb_strlen($this->container['nombre_otorgante']) < 0)) {
+            $invalidProperties[] = "invalid value for 'nombre_otorgante', the character length must be bigger than or equal to 0.";
+        }
+        if (!is_null($this->container['direccion_otorgante']) && (mb_strlen($this->container['direccion_otorgante']) > 80)) {
+            $invalidProperties[] = "invalid value for 'direccion_otorgante', the character length must be smaller than or equal to 80.";
+        }
+        if (!is_null($this->container['direccion_otorgante']) && (mb_strlen($this->container['direccion_otorgante']) < 0)) {
+            $invalidProperties[] = "invalid value for 'direccion_otorgante', the character length must be bigger than or equal to 0.";
+        }
         if (!is_null($this->container['id_domicilio']) && (mb_strlen($this->container['id_domicilio']) > 20)) {
             $invalidProperties[] = "invalid value for 'id_domicilio', the character length must be smaller than or equal to 20.";
         }
         if (!is_null($this->container['id_domicilio']) && (mb_strlen($this->container['id_domicilio']) < 0)) {
             $invalidProperties[] = "invalid value for 'id_domicilio', the character length must be bigger than or equal to 0.";
+        }
+        $allowedValues = $this->getServiciosAllowableValues();
+        if (!is_null($this->container['servicios']) && !in_array($this->container['servicios'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'servicios', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+        if (!is_null($this->container['servicios']) && (mb_strlen($this->container['servicios']) > 1)) {
+            $invalidProperties[] = "invalid value for 'servicios', the character length must be smaller than or equal to 1.";
+        }
+        if (!is_null($this->container['servicios']) && (mb_strlen($this->container['servicios']) < 0)) {
+            $invalidProperties[] = "invalid value for 'servicios', the character length must be bigger than or equal to 0.";
         }
         return $invalidProperties;
     }
@@ -165,6 +207,12 @@ class Consulta implements ModelInterface, ArrayAccess
     
     public function setClaveOtorgante($clave_otorgante)
     {
+        if (!is_null($clave_otorgante) && (mb_strlen($clave_otorgante) > 10)) {
+            throw new \InvalidArgumentException('invalid length for $clave_otorgante when calling Consulta., must be smaller than or equal to 10.');
+        }
+        if (!is_null($clave_otorgante) && (mb_strlen($clave_otorgante) < 0)) {
+            throw new \InvalidArgumentException('invalid length for $clave_otorgante when calling Consulta., must be bigger than or equal to 0.');
+        }
         $this->container['clave_otorgante'] = $clave_otorgante;
         return $this;
     }
@@ -176,6 +224,12 @@ class Consulta implements ModelInterface, ArrayAccess
     
     public function setNombreOtorgante($nombre_otorgante)
     {
+        if (!is_null($nombre_otorgante) && (mb_strlen($nombre_otorgante) > 40)) {
+            throw new \InvalidArgumentException('invalid length for $nombre_otorgante when calling Consulta., must be smaller than or equal to 40.');
+        }
+        if (!is_null($nombre_otorgante) && (mb_strlen($nombre_otorgante) < 0)) {
+            throw new \InvalidArgumentException('invalid length for $nombre_otorgante when calling Consulta., must be bigger than or equal to 0.');
+        }
         $this->container['nombre_otorgante'] = $nombre_otorgante;
         return $this;
     }
@@ -187,6 +241,12 @@ class Consulta implements ModelInterface, ArrayAccess
     
     public function setDireccionOtorgante($direccion_otorgante)
     {
+        if (!is_null($direccion_otorgante) && (mb_strlen($direccion_otorgante) > 80)) {
+            throw new \InvalidArgumentException('invalid length for $direccion_otorgante when calling Consulta., must be smaller than or equal to 80.');
+        }
+        if (!is_null($direccion_otorgante) && (mb_strlen($direccion_otorgante) < 0)) {
+            throw new \InvalidArgumentException('invalid length for $direccion_otorgante when calling Consulta., must be bigger than or equal to 0.');
+        }
         $this->container['direccion_otorgante'] = $direccion_otorgante;
         return $this;
     }
@@ -213,6 +273,17 @@ class Consulta implements ModelInterface, ArrayAccess
         return $this;
     }
     
+    public function getClaveUnidadMonetaria()
+    {
+        return $this->container['clave_unidad_monetaria'];
+    }
+    
+    public function setClaveUnidadMonetaria($clave_unidad_monetaria)
+    {
+        $this->container['clave_unidad_monetaria'] = $clave_unidad_monetaria;
+        return $this;
+    }
+    
     public function getImporteCredito()
     {
         return $this->container['importe_credito'];
@@ -232,17 +303,6 @@ class Consulta implements ModelInterface, ArrayAccess
     public function setTipoResponsabilidad($tipo_responsabilidad)
     {
         $this->container['tipo_responsabilidad'] = $tipo_responsabilidad;
-        return $this;
-    }
-    
-    public function getClaveUnidadMonetaria()
-    {
-        return $this->container['clave_unidad_monetaria'];
-    }
-    
-    public function setClaveUnidadMonetaria($clave_unidad_monetaria)
-    {
-        $this->container['clave_unidad_monetaria'] = $clave_unidad_monetaria;
         return $this;
     }
     
@@ -270,6 +330,21 @@ class Consulta implements ModelInterface, ArrayAccess
     
     public function setServicios($servicios)
     {
+        $allowedValues = $this->getServiciosAllowableValues();
+        if (!is_null($servicios) && !in_array($servicios, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'servicios', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        if (!is_null($servicios) && (mb_strlen($servicios) > 1)) {
+            throw new \InvalidArgumentException('invalid length for $servicios when calling Consulta., must be smaller than or equal to 1.');
+        }
+        if (!is_null($servicios) && (mb_strlen($servicios) < 0)) {
+            throw new \InvalidArgumentException('invalid length for $servicios when calling Consulta., must be bigger than or equal to 0.');
+        }
         $this->container['servicios'] = $servicios;
         return $this;
     }

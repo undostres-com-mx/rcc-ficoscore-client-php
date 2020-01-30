@@ -1,6 +1,6 @@
 # Reporte de crédito consolidado con FICO® Score
 
-Este reporte muestra el historial crediticio, el cumplimiento de pago de los compromisos que la persona ha adquirido con entidades financieras, no financieras e instituciones comerciales que dan crédito o participan en actividades afines al crédito.
+Este reporte muestra el historial crediticio con los Campos Asociados a Nómina, el cumplimiento de pago de los compromisos que la persona ha adquirido con entidades financieras, no financieras e instituciones comerciales que dan crédito o participan en actividades afines al crédito.
 ## Requisitos
 
 PHP 7.1 ó superior
@@ -93,85 +93,109 @@ $this->signer = new \RCCFicoScore\Client\Interceptor\KeyHandler(
 ```
  > **NOTA:** Sólamente en caso de que el contenedor haya cifrado, se debe colocar la contraseña en una variable de ambiente e indicar el nombre de la misma, como se ve en la imagen anterior.
 ### Paso 4. Modificar URL
- Modificar la URL de la petición en ***test/Api/ReporteDeCrditoConFicoScoreApiTest.php*** en la línea 29, como se muestra en el siguiente fragmento de código:
+ Modificar la URL de la petición en ***test/Api/ApiTest.php*** en la línea 30, como se muestra en el siguiente fragmento de código:
  ```php
  $config = new \RCCFicoScore\Client\Configuration();
  $config->setHost('the_url');
  ```
-### Paso 5. Capturar los datos de la petición
+ 
+### Paso 5. Reporte completo o segmentado
+ Modificar la variable en ***test/Api/ApiTest.php*** (false si es segmentado o true para reporte completo) en la línea 36, como se muestra en el siguiente fragmento de código:
+ ```php
+$this->x_full_report = 'false';
+ ```
+### Paso 6. Capturar los datos de la petición
 
 Es importante contar con el setUp() que se encargará de firmar y verificar la petición.
+
 ```php
 <?php
-public function setUp()
+namespace RCCFicoScore\Client;
+
+use \GuzzleHttp\Client;
+use \GuzzleHttp\Event\Emitter;
+use \GuzzleHttp\Middleware;
+use \GuzzleHttp\HandlerStack as handlerStack;
+
+use \RCCFicoScore\Client\ApiException;
+use \RCCFicoScore\Client\Configuration;
+use \RCCFicoScore\Client\Model\Error;
+use \RCCFicoScore\Client\Interceptor\KeyHandler;
+use \RCCFicoScore\Client\Interceptor\MiddlewareEvents;
+
+class RCCFicoScoreApiTest extends \PHPUnit_Framework_TestCase
 {
-    $password = getenv('KEY_PASSWORD');
-    $this->signer = new \RCCFicoScore\Client\Interceptor\KeyHandler(null, null, $password);
-    $events = new \RCCFicoScore\Client\Interceptor\MiddlewareEvents($this->signer);
-    $handler = handlerStack::create();
-    $handler->push($events->add_signature_header('x-signature'));
-    $handler->push($events->verify_signature_header('x-signature'));
-    $client = new \GuzzleHttp\Client(['handler' => $handler]);
 
-    $config = new \RCCFicoScore\Client\Configuration();
-    $config->setHost('the_url');
-    $this->apiInstance = new \RCCFicoScore\Client\Api\ReporteDeCrditoConFicoScoreApi($client, $config);
-    $this->x_api_key = "your_api_key";
-    $this->username = "your_username";
-    $this->password = "your_password";
-}    
-```
-```php
-<?php
-
-public function testGetReporte()
+    public function setUp()
     {
+        $password = getenv('KEY_PASSWORD');
+        $this->signer = new \RCCFicoScore\Client\Interceptor\KeyHandler(null, null, $password);
 
         $events = new \RCCFicoScore\Client\Interceptor\MiddlewareEvents($this->signer);
-        $handler = handlerStack::create();    
+        $handler = handlerStack::create();
         $handler->push($events->add_signature_header('x-signature'));
         $handler->push($events->verify_signature_header('x-signature'));
-        $client = new \GuzzleHttp\Client([
-            'handler' => $handler,
-            'verify' => false
-        ]); 
+        $client = new \GuzzleHttp\Client(['handler' => $handler]);
 
-        $this->apiInstance = new \RCCFicoScore\Client\Api\ReporteDeCrditoApi($client);
+        $config = new \RCCFicoScore\Client\Configuration();
+        $config->setHost('the_url');
+        
+        $this->apiInstance = new \RCCFicoScore\Client\Api\RCCFicoScoreApi($client, $config);
+        $this->x_api_key = "your_api_key";
+        $this->username = "your_username";
+        $this->password = "your_password";
+        $this->x_full_report = 'false';    
+    }
 
-        $x_api_key = "your_api_key";
-        $username = "your_username";
-        $password = "your_password";
-
+    public function testGetReporte()
+    {
+        $estado = new \RCCFicoScore\Client\Model\CatalogoEstados();
         $request = new \RCCFicoScore\Client\Model\PersonaPeticion();
-        $request->setPrimerNombre("XXXXXXXXXX");
-        $request->setSegundoNombre(null);
-        $request->setApellidoPaterno("XXXXXXXXXX");
-        $request->setApellidoMaterno("XXXXXXXXXX");
-        $request->setApellidoAdicional(null);
-        $request->setFechaNacimiento("YYYY-MM-DD");
-        $request->setRfc("XXXXXXXXXX");
-        $request->setCurp(null);
 
-        $domicilio = new \RCCFicoScore\Client\Model\Domicilio();
-        $domicilio->setDireccion("XXXXXXXXXX");
-        $domicilio->setColonia("XXXXXXXXXX");
-        $domicilio->setCiudad("XXXXXXXXXX");
-        $domicilio->setCodigoPostal("XXXXXXXXXX");
-        $domicilio->setMunicipio("XXXXXXXXXX");
-        $domicilio->setEstado("XXX");
+        $request->setApellidoPaterno("PATERNO");
+        $request->setApellidoMaterno("MATERNO");
+        $request->setApellidoAdicional(null);
+        $request->setPrimerNombre("PRIMERNOMBRE");
+        $request->setSegundoNombre(null);
+        $request->setFechaNacimiento("1952-05-13");
+        $request->setRfc("PAMP010101");
+        $request->setCurp(null);
+        $request->setNacionalidad(null);
+        $request->setResidencia(null);
+        $request->setEstadoCivil(null);
+        $request->setSexo(null);
+        $request->setClaveElectorIfe(null);
+        $request->setNumeroDependientes(null);
+        $request->setFechaDefuncion(null);
+
+        $domicilio = new \RCCFicoScore\Client\Model\DomicilioPeticion();
+
+        $domicilio = new \RCCFicoScore\Client\Model\DomicilioPeticion();
+        $domicilio->setDireccion("HIDALGO 32");
+        $domicilio->setColoniaPoblacion(null);
+        $domicilio->setDelegacionMunicipio("LA BARCA");
+        $domicilio->setCiudad("BENITO JUAREZ");
+        $domicilio->setEstado($estado::JAL);
+        $domicilio->setCp("44190");
+        $domicilio->setFechaResidencia(null);
+        $domicilio->setNumeroTelefono(null);
+        $domicilio->setTipoDomicilio(null);
+        $domicilio->setTipoAsentamiento(null);
         $request->setDomicilio($domicilio);
 
+
         try {
-            $result = $this->apiInstance->getReporte($x_api_key, $username, $password, $request);
+            $result = $this->apiInstance->getReporte($this->x_api_key, $this->username, $this->password, $request, $this->x_full_report);
             $this->signer->close();
             print_r($result);
             $this->assertTrue($result->getFolioConsulta()!==null);
             return $result->getFolioConsulta();
         } catch (Exception $e) {
-            echo 'Exception when calling ReporteDeCrditoApi->getReporte: ', $e->getMessage(), PHP_EOL;
+            echo 'Exception when calling RCCFicoScoreApi->getReporte: ', $e->getMessage(), PHP_EOL;
         }
-    }
-?>
+    }     
+}
+
 ```
 ## Pruebas unitarias
 

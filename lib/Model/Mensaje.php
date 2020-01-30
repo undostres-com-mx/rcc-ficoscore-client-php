@@ -5,20 +5,20 @@ namespace RCCFicoScore\Client\Model;
 use \ArrayAccess;
 use \RCCFicoScore\Client\ObjectSerializer;
 
-class Razon implements ModelInterface, ArrayAccess
+class Mensaje implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
     
-    protected static $apihubModelName = 'Razon';
+    protected static $apihubModelName = 'Mensaje';
     
     protected static $apihubTypes = [
-        'clave' => '\RCCFicoScore\Client\Model\CatalogoRazones',
-        'descripcion' => 'string'
+        'tipo_mensaje' => 'int',
+        'leyenda' => 'string'
     ];
     
     protected static $apihubFormats = [
-        'clave' => null,
-        'descripcion' => null
+        'tipo_mensaje' => 'int32',
+        'leyenda' => null
     ];
     
     public static function apihubTypes()
@@ -32,18 +32,18 @@ class Razon implements ModelInterface, ArrayAccess
     }
     
     protected static $attributeMap = [
-        'clave' => 'clave',
-        'descripcion' => 'descripcion'
+        'tipo_mensaje' => 'tipoMensaje',
+        'leyenda' => 'leyenda'
     ];
     
     protected static $setters = [
-        'clave' => 'setClave',
-        'descripcion' => 'setDescripcion'
+        'tipo_mensaje' => 'setTipoMensaje',
+        'leyenda' => 'setLeyenda'
     ];
     
     protected static $getters = [
-        'clave' => 'getClave',
-        'descripcion' => 'getDescripcion'
+        'tipo_mensaje' => 'getTipoMensaje',
+        'leyenda' => 'getLeyenda'
     ];
     
     public static function attributeMap()
@@ -72,18 +72,15 @@ class Razon implements ModelInterface, ArrayAccess
     
     public function __construct(array $data = null)
     {
-        $this->container['clave'] = isset($data['clave']) ? $data['clave'] : null;
-        $this->container['descripcion'] = isset($data['descripcion']) ? $data['descripcion'] : null;
+        $this->container['tipo_mensaje'] = isset($data['tipo_mensaje']) ? $data['tipo_mensaje'] : null;
+        $this->container['leyenda'] = isset($data['leyenda']) ? $data['leyenda'] : null;
     }
     
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-        if ($this->container['clave'] === null) {
-            $invalidProperties[] = "'clave' can't be null";
-        }
-        if ($this->container['descripcion'] === null) {
-            $invalidProperties[] = "'descripcion' can't be null";
+        if (!is_null($this->container['leyenda']) && (mb_strlen($this->container['leyenda']) > 100)) {
+            $invalidProperties[] = "invalid value for 'leyenda', the character length must be smaller than or equal to 100.";
         }
         return $invalidProperties;
     }
@@ -93,25 +90,28 @@ class Razon implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
     
-    public function getClave()
+    public function getTipoMensaje()
     {
-        return $this->container['clave'];
+        return $this->container['tipo_mensaje'];
     }
     
-    public function setClave($clave)
+    public function setTipoMensaje($tipo_mensaje)
     {
-        $this->container['clave'] = $clave;
+        $this->container['tipo_mensaje'] = $tipo_mensaje;
         return $this;
     }
     
-    public function getDescripcion()
+    public function getLeyenda()
     {
-        return $this->container['descripcion'];
+        return $this->container['leyenda'];
     }
     
-    public function setDescripcion($descripcion)
+    public function setLeyenda($leyenda)
     {
-        $this->container['descripcion'] = $descripcion;
+        if (!is_null($leyenda) && (mb_strlen($leyenda) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $leyenda when calling Mensaje., must be smaller than or equal to 100.');
+        }
+        $this->container['leyenda'] = $leyenda;
         return $this;
     }
     

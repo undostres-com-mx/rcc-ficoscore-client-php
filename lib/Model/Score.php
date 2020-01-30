@@ -13,13 +13,13 @@ class Score implements ModelInterface, ArrayAccess
     
     protected static $apihubTypes = [
         'nombre_score' => 'string',
-        'score' => 'string',
-        'razones' => '\RCCFicoScore\Client\Model\Razon[]'
+        'valor' => 'int',
+        'razones' => '\RCCFicoScore\Client\Model\CatalogoRazones[]'
     ];
     
     protected static $apihubFormats = [
         'nombre_score' => null,
-        'score' => null,
+        'valor' => 'int32',
         'razones' => null
     ];
     
@@ -35,19 +35,19 @@ class Score implements ModelInterface, ArrayAccess
     
     protected static $attributeMap = [
         'nombre_score' => 'nombreScore',
-        'score' => 'score',
+        'valor' => 'valor',
         'razones' => 'razones'
     ];
     
     protected static $setters = [
         'nombre_score' => 'setNombreScore',
-        'score' => 'setScore',
+        'valor' => 'setValor',
         'razones' => 'setRazones'
     ];
     
     protected static $getters = [
         'nombre_score' => 'getNombreScore',
-        'score' => 'getScore',
+        'valor' => 'getValor',
         'razones' => 'getRazones'
     ];
     
@@ -78,13 +78,19 @@ class Score implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['nombre_score'] = isset($data['nombre_score']) ? $data['nombre_score'] : null;
-        $this->container['score'] = isset($data['score']) ? $data['score'] : null;
+        $this->container['valor'] = isset($data['valor']) ? $data['valor'] : null;
         $this->container['razones'] = isset($data['razones']) ? $data['razones'] : null;
     }
     
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+        if (!is_null($this->container['valor']) && ($this->container['valor'] > 900)) {
+            $invalidProperties[] = "invalid value for 'valor', must be smaller than or equal to 900.";
+        }
+        if (!is_null($this->container['valor']) && ($this->container['valor'] < 0)) {
+            $invalidProperties[] = "invalid value for 'valor', must be bigger than or equal to 0.";
+        }
         return $invalidProperties;
     }
     
@@ -104,14 +110,20 @@ class Score implements ModelInterface, ArrayAccess
         return $this;
     }
     
-    public function getScore()
+    public function getValor()
     {
-        return $this->container['score'];
+        return $this->container['valor'];
     }
     
-    public function setScore($score)
+    public function setValor($valor)
     {
-        $this->container['score'] = $score;
+        if (!is_null($valor) && ($valor > 900)) {
+            throw new \InvalidArgumentException('invalid value for $valor when calling Score., must be smaller than or equal to 900.');
+        }
+        if (!is_null($valor) && ($valor < 0)) {
+            throw new \InvalidArgumentException('invalid value for $valor when calling Score., must be bigger than or equal to 0.');
+        }
+        $this->container['valor'] = $valor;
         return $this;
     }
     
