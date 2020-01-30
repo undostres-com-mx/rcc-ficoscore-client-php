@@ -13,7 +13,7 @@ use RCCFicoScore\Client\Configuration;
 use RCCFicoScore\Client\HeaderSelector;
 use RCCFicoScore\Client\ObjectSerializer;
 
-class ReporteDeCrditoConFicoScoreApi
+class RCCFicoScoreApi
 {
     
     protected $client;
@@ -573,7 +573,7 @@ class ReporteDeCrditoConFicoScoreApi
     
     public function getDomiciliosWithHttpInfo($folio_consulta, $x_api_key, $username, $password)
     {
-        $returnType = '\RCCFicoScore\Client\Model\Domicilios';
+        $returnType = '\RCCFicoScore\Client\Model\DomiciliosRespuesta';
         $request = $this->getDomiciliosRequest($folio_consulta, $x_api_key, $username, $password);
         try {
             $options = $this->createHttpClientOption();
@@ -619,7 +619,7 @@ class ReporteDeCrditoConFicoScoreApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\RCCFicoScore\Client\Model\Domicilios',
+                        '\RCCFicoScore\Client\Model\DomiciliosRespuesta',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -697,7 +697,7 @@ class ReporteDeCrditoConFicoScoreApi
     
     public function getDomiciliosAsyncWithHttpInfo($folio_consulta, $x_api_key, $username, $password)
     {
-        $returnType = '\RCCFicoScore\Client\Model\Domicilios';
+        $returnType = '\RCCFicoScore\Client\Model\DomiciliosRespuesta';
         $request = $this->getDomiciliosRequest($folio_consulta, $x_api_key, $username, $password);
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -828,7 +828,7 @@ class ReporteDeCrditoConFicoScoreApi
             $httpBody
         );
     }
-    
+
     public function getEmpleos($folio_consulta, $x_api_key, $username, $password)
     {
         list($response) = $this->getEmpleosWithHttpInfo($folio_consulta, $x_api_key, $username, $password);
@@ -1093,6 +1093,300 @@ class ReporteDeCrditoConFicoScoreApi
         );
     }
     
+    public function getMensajes($folio_consulta, $x_api_key, $username, $password)
+    {
+        list($response) = $this->getMensajesWithHttpInfo($folio_consulta, $x_signature, $x_api_key, $username, $password);
+        return $response;
+    }
+
+    public function getMensajesWithHttpInfo($folio_consulta, $x_signature, $x_api_key, $username, $password)
+    {
+        $returnType = '\RCCFicoScore\Client\Model\Mensajes';
+        $request = $this->getMensajesRequest($folio_consulta, $x_signature, $x_api_key, $username, $password);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\RCCFicoScore\Client\Model\Mensajes',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\RCCFicoScore\Client\Model\Errores',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\RCCFicoScore\Client\Model\Errores',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\RCCFicoScore\Client\Model\Errores',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\RCCFicoScore\Client\Model\Errores',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\RCCFicoScore\Client\Model\Errores',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\RCCFicoScore\Client\Model\Errores',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\RCCFicoScore\Client\Model\Errores',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    public function getMensajesAsync($folio_consulta, $x_signature, $x_api_key, $username, $password)
+    {
+        return $this->getMensajesAsyncWithHttpInfo($folio_consulta, $x_signature, $x_api_key, $username, $password)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    public function getMensajesAsyncWithHttpInfo($folio_consulta, $x_signature, $x_api_key, $username, $password)
+    {
+        $returnType = '\RCCFicoScore\Client\Model\Mensajes';
+        $request = $this->getMensajesRequest($folio_consulta, $x_signature, $x_api_key, $username, $password);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    protected function getMensajesRequest($folio_consulta, $x_signature, $x_api_key, $username, $password)
+    {
+        // verify the required parameter 'folio_consulta' is set
+        if ($folio_consulta === null || (is_array($folio_consulta) && count($folio_consulta) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $folio_consulta when calling getMensajes'
+            );
+        }
+        // verify the required parameter 'x_api_key' is set
+        if ($x_api_key === null || (is_array($x_api_key) && count($x_api_key) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $x_api_key when calling getMensajes'
+            );
+        }
+        // verify the required parameter 'username' is set
+        if ($username === null || (is_array($username) && count($username) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $username when calling getMensajes'
+            );
+        }
+        // verify the required parameter 'password' is set
+        if ($password === null || (is_array($password) && count($password) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $password when calling getMensajes'
+            );
+        }
+        $resourcePath = '/{folioConsulta}/mensajes';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+        // header params
+        if ($x_api_key !== null) {
+            $headerParams['x-api-key'] = ObjectSerializer::toHeaderValue($x_api_key);
+        }
+        // header params
+        if ($username !== null) {
+            $headerParams['username'] = ObjectSerializer::toHeaderValue($username);
+        }
+        // header params
+        if ($password !== null) {
+            $headerParams['password'] = ObjectSerializer::toHeaderValue($password);
+        }
+        // path params
+        if ($folio_consulta !== null) {
+            $resourcePath = str_replace(
+                '{' . 'folioConsulta' . '}',
+                ObjectSerializer::toPathValue($folio_consulta),
+                $resourcePath
+            );
+        }
+        // body params
+        $_tempBody = null;
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody;
+            
+            if($headers['Content-Type'] === 'application/json') {
+                if ($httpBody instanceof \stdClass) {
+                    $httpBody = \GuzzleHttp\json_encode($httpBody);
+                }
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+
+
+
     public function getReporte($x_api_key, $username, $password, $request, $x_full_report = 'false')
     {
         list($response) = $this->getReporteWithHttpInfo($x_api_key, $username, $password, $request, $x_full_report);

@@ -5,18 +5,18 @@ namespace RCCFicoScore\Client\Model;
 use \ArrayAccess;
 use \RCCFicoScore\Client\ObjectSerializer;
 
-class Empleos implements ModelInterface, ArrayAccess
+class DomiciliosRespuesta implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
     
-    protected static $apihubModelName = 'Empleos';
+    protected static $apihubModelName = 'DomiciliosRespuesta';
     
     protected static $apihubTypes = [
-        'empleos' => '\RCCFicoScore\Client\Model\Empleo[]'
+        'domicilios' => '\RCCFicoScore\Client\Model\DomicilioRespuesta[]'
     ];
     
     protected static $apihubFormats = [
-        'empleos' => null
+        'domicilios' => null
     ];
     
     public static function apihubTypes()
@@ -30,15 +30,15 @@ class Empleos implements ModelInterface, ArrayAccess
     }
     
     protected static $attributeMap = [
-        'empleos' => 'empleos'
+        'domicilios' => 'domicilios'
     ];
     
     protected static $setters = [
-        'empleos' => 'setEmpleos'
+        'domicilios' => 'setDomicilios'
     ];
     
     protected static $getters = [
-        'empleos' => 'getEmpleos'
+        'domicilios' => 'getDomicilios'
     ];
     
     public static function attributeMap()
@@ -67,7 +67,7 @@ class Empleos implements ModelInterface, ArrayAccess
     
     public function __construct(array $data = null)
     {
-        $this->container['empleos'] = isset($data['empleos']) ? $data['empleos'] : null;
+        $this->container['domicilios'] = isset($data['domicilios']) ? $data['domicilios'] : null;
     }
     
     public function listInvalidProperties()
@@ -81,14 +81,14 @@ class Empleos implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
     
-    public function getEmpleos()
+    public function getDomicilios()
     {
-        return $this->container['empleos'];
+        return $this->container['domicilios'];
     }
     
-    public function setEmpleos($empleos)
+    public function setDomicilios($domicilios)
     {
-        $this->container['empleos'] = $empleos;
+        $this->container['domicilios'] = $domicilios;
         return $this;
     }
     
