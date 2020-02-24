@@ -49,14 +49,7 @@ class Credito implements ModelInterface, ArrayAccess
         'monto_ultimo_pago' => 'double',
         'id_domicilio' => 'string',
         'servicios' => 'string',
-        'identificador_can' => 'string',
-        'prelacion_orige' => 'string',
-        'prelacion_actual' => 'string',
-        'fecha_apertura_can' => 'string',
-        'fecha_cancelacion_can' => 'string',
-        'historico_can' => 'string',
-        'fecha_mrcan' => 'string',
-        'fecha_macan' => 'string'
+        'can' => '\RCCFicoScore\Client\Model\CAN'
     ];
     
     protected static $apihubFormats = [
@@ -97,14 +90,7 @@ class Credito implements ModelInterface, ArrayAccess
         'monto_ultimo_pago' => 'double',
         'id_domicilio' => null,
         'servicios' => null,
-        'identificador_can' => null,
-        'prelacion_orige' => null,
-        'prelacion_actual' => null,
-        'fecha_apertura_can' => 'yyyy-MM-dd',
-        'fecha_cancelacion_can' => 'yyyy-MM-dd',
-        'historico_can' => null,
-        'fecha_mrcan' => 'yyyy-MM-dd',
-        'fecha_macan' => 'yyyy-MM-dd'
+        'can' => null
     ];
     
     public static function apihubTypes()
@@ -155,14 +141,7 @@ class Credito implements ModelInterface, ArrayAccess
         'monto_ultimo_pago' => 'montoUltimoPago',
         'id_domicilio' => 'idDomicilio',
         'servicios' => 'servicios',
-        'identificador_can' => 'identificadorCan',
-        'prelacion_orige' => 'prelacionOrige',
-        'prelacion_actual' => 'prelacionActual',
-        'fecha_apertura_can' => 'fechaAperturaCAN',
-        'fecha_cancelacion_can' => 'fechaCancelacionCAN',
-        'historico_can' => 'historicoCAN',
-        'fecha_mrcan' => 'fechaMRCAN',
-        'fecha_macan' => 'fechaMACAN'
+        'can' => 'CAN'
     ];
     
     protected static $setters = [
@@ -203,14 +182,7 @@ class Credito implements ModelInterface, ArrayAccess
         'monto_ultimo_pago' => 'setMontoUltimoPago',
         'id_domicilio' => 'setIdDomicilio',
         'servicios' => 'setServicios',
-        'identificador_can' => 'setIdentificadorCan',
-        'prelacion_orige' => 'setPrelacionOrige',
-        'prelacion_actual' => 'setPrelacionActual',
-        'fecha_apertura_can' => 'setFechaAperturaCan',
-        'fecha_cancelacion_can' => 'setFechaCancelacionCan',
-        'historico_can' => 'setHistoricoCan',
-        'fecha_mrcan' => 'setFechaMrcan',
-        'fecha_macan' => 'setFechaMacan'
+        'can' => 'setCan'
     ];
     
     protected static $getters = [
@@ -251,14 +223,7 @@ class Credito implements ModelInterface, ArrayAccess
         'monto_ultimo_pago' => 'getMontoUltimoPago',
         'id_domicilio' => 'getIdDomicilio',
         'servicios' => 'getServicios',
-        'identificador_can' => 'getIdentificadorCan',
-        'prelacion_orige' => 'getPrelacionOrige',
-        'prelacion_actual' => 'getPrelacionActual',
-        'fecha_apertura_can' => 'getFechaAperturaCan',
-        'fecha_cancelacion_can' => 'getFechaCancelacionCan',
-        'historico_can' => 'getHistoricoCan',
-        'fecha_mrcan' => 'getFechaMrcan',
-        'fecha_macan' => 'getFechaMacan'
+        'can' => 'getCan'
     ];
     
     public static function attributeMap()
@@ -324,14 +289,7 @@ class Credito implements ModelInterface, ArrayAccess
         $this->container['monto_ultimo_pago'] = isset($data['monto_ultimo_pago']) ? $data['monto_ultimo_pago'] : null;
         $this->container['id_domicilio'] = isset($data['id_domicilio']) ? $data['id_domicilio'] : null;
         $this->container['servicios'] = isset($data['servicios']) ? $data['servicios'] : null;
-        $this->container['identificador_can'] = isset($data['identificador_can']) ? $data['identificador_can'] : null;
-        $this->container['prelacion_orige'] = isset($data['prelacion_orige']) ? $data['prelacion_orige'] : null;
-        $this->container['prelacion_actual'] = isset($data['prelacion_actual']) ? $data['prelacion_actual'] : null;
-        $this->container['fecha_apertura_can'] = isset($data['fecha_apertura_can']) ? $data['fecha_apertura_can'] : null;
-        $this->container['fecha_cancelacion_can'] = isset($data['fecha_cancelacion_can']) ? $data['fecha_cancelacion_can'] : null;
-        $this->container['historico_can'] = isset($data['historico_can']) ? $data['historico_can'] : null;
-        $this->container['fecha_mrcan'] = isset($data['fecha_mrcan']) ? $data['fecha_mrcan'] : null;
-        $this->container['fecha_macan'] = isset($data['fecha_macan']) ? $data['fecha_macan'] : null;
+        $this->container['can'] = isset($data['can']) ? $data['can'] : null;
     }
     
     public function listInvalidProperties()
@@ -340,20 +298,11 @@ class Credito implements ModelInterface, ArrayAccess
         if (!is_null($this->container['clave_otorgante']) && (mb_strlen($this->container['clave_otorgante']) > 10)) {
             $invalidProperties[] = "invalid value for 'clave_otorgante', the character length must be smaller than or equal to 10.";
         }
-        if (!is_null($this->container['clave_otorgante']) && (mb_strlen($this->container['clave_otorgante']) < 0)) {
-            $invalidProperties[] = "invalid value for 'clave_otorgante', the character length must be bigger than or equal to 0.";
-        }
         if (!is_null($this->container['nombre_otorgante']) && (mb_strlen($this->container['nombre_otorgante']) > 40)) {
             $invalidProperties[] = "invalid value for 'nombre_otorgante', the character length must be smaller than or equal to 40.";
         }
-        if (!is_null($this->container['nombre_otorgante']) && (mb_strlen($this->container['nombre_otorgante']) < 0)) {
-            $invalidProperties[] = "invalid value for 'nombre_otorgante', the character length must be bigger than or equal to 0.";
-        }
         if (!is_null($this->container['cuenta_actual']) && (mb_strlen($this->container['cuenta_actual']) > 25)) {
             $invalidProperties[] = "invalid value for 'cuenta_actual', the character length must be smaller than or equal to 25.";
-        }
-        if (!is_null($this->container['cuenta_actual']) && (mb_strlen($this->container['cuenta_actual']) < 0)) {
-            $invalidProperties[] = "invalid value for 'cuenta_actual', the character length must be bigger than or equal to 0.";
         }
         return $invalidProperties;
     }
@@ -395,9 +344,6 @@ class Credito implements ModelInterface, ArrayAccess
         if (!is_null($clave_otorgante) && (mb_strlen($clave_otorgante) > 10)) {
             throw new \InvalidArgumentException('invalid length for $clave_otorgante when calling Credito., must be smaller than or equal to 10.');
         }
-        if (!is_null($clave_otorgante) && (mb_strlen($clave_otorgante) < 0)) {
-            throw new \InvalidArgumentException('invalid length for $clave_otorgante when calling Credito., must be bigger than or equal to 0.');
-        }
         $this->container['clave_otorgante'] = $clave_otorgante;
         return $this;
     }
@@ -412,9 +358,6 @@ class Credito implements ModelInterface, ArrayAccess
         if (!is_null($nombre_otorgante) && (mb_strlen($nombre_otorgante) > 40)) {
             throw new \InvalidArgumentException('invalid length for $nombre_otorgante when calling Credito., must be smaller than or equal to 40.');
         }
-        if (!is_null($nombre_otorgante) && (mb_strlen($nombre_otorgante) < 0)) {
-            throw new \InvalidArgumentException('invalid length for $nombre_otorgante when calling Credito., must be bigger than or equal to 0.');
-        }
         $this->container['nombre_otorgante'] = $nombre_otorgante;
         return $this;
     }
@@ -428,9 +371,6 @@ class Credito implements ModelInterface, ArrayAccess
     {
         if (!is_null($cuenta_actual) && (mb_strlen($cuenta_actual) > 25)) {
             throw new \InvalidArgumentException('invalid length for $cuenta_actual when calling Credito., must be smaller than or equal to 25.');
-        }
-        if (!is_null($cuenta_actual) && (mb_strlen($cuenta_actual) < 0)) {
-            throw new \InvalidArgumentException('invalid length for $cuenta_actual when calling Credito., must be bigger than or equal to 0.');
         }
         $this->container['cuenta_actual'] = $cuenta_actual;
         return $this;
@@ -788,91 +728,14 @@ class Credito implements ModelInterface, ArrayAccess
         return $this;
     }
     
-    public function getIdentificadorCan()
+    public function getCan()
     {
-        return $this->container['identificador_can'];
+        return $this->container['can'];
     }
     
-    public function setIdentificadorCan($identificador_can)
+    public function setCan($can)
     {
-        $this->container['identificador_can'] = $identificador_can;
-        return $this;
-    }
-    
-    public function getPrelacionOrige()
-    {
-        return $this->container['prelacion_orige'];
-    }
-    
-    public function setPrelacionOrige($prelacion_orige)
-    {
-        $this->container['prelacion_orige'] = $prelacion_orige;
-        return $this;
-    }
-    
-    public function getPrelacionActual()
-    {
-        return $this->container['prelacion_actual'];
-    }
-    
-    public function setPrelacionActual($prelacion_actual)
-    {
-        $this->container['prelacion_actual'] = $prelacion_actual;
-        return $this;
-    }
-    
-    public function getFechaAperturaCan()
-    {
-        return $this->container['fecha_apertura_can'];
-    }
-    
-    public function setFechaAperturaCan($fecha_apertura_can)
-    {
-        $this->container['fecha_apertura_can'] = $fecha_apertura_can;
-        return $this;
-    }
-    
-    public function getFechaCancelacionCan()
-    {
-        return $this->container['fecha_cancelacion_can'];
-    }
-    
-    public function setFechaCancelacionCan($fecha_cancelacion_can)
-    {
-        $this->container['fecha_cancelacion_can'] = $fecha_cancelacion_can;
-        return $this;
-    }
-    
-    public function getHistoricoCan()
-    {
-        return $this->container['historico_can'];
-    }
-    
-    public function setHistoricoCan($historico_can)
-    {
-        $this->container['historico_can'] = $historico_can;
-        return $this;
-    }
-    
-    public function getFechaMrcan()
-    {
-        return $this->container['fecha_mrcan'];
-    }
-    
-    public function setFechaMrcan($fecha_mrcan)
-    {
-        $this->container['fecha_mrcan'] = $fecha_mrcan;
-        return $this;
-    }
-    
-    public function getFechaMacan()
-    {
-        return $this->container['fecha_macan'];
-    }
-    
-    public function setFechaMacan($fecha_macan)
-    {
-        $this->container['fecha_macan'] = $fecha_macan;
+        $this->container['can'] = $can;
         return $this;
     }
     

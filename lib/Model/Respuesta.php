@@ -15,6 +15,7 @@ class Respuesta implements ModelInterface, ArrayAccess
         'folio_consulta' => 'string',
         'folio_consulta_otorgante' => 'string',
         'clave_otorgante' => 'string',
+        'declaraciones_consumidor' => 'string',
         'persona' => '\RCCFicoScore\Client\Model\PersonasRespuesta',
         'consultas' => '\RCCFicoScore\Client\Model\Consulta[]',
         'creditos' => '\RCCFicoScore\Client\Model\Credito[]',
@@ -28,6 +29,7 @@ class Respuesta implements ModelInterface, ArrayAccess
         'folio_consulta' => null,
         'folio_consulta_otorgante' => null,
         'clave_otorgante' => null,
+        'declaraciones_consumidor' => null,
         'persona' => null,
         'consultas' => null,
         'creditos' => null,
@@ -51,6 +53,7 @@ class Respuesta implements ModelInterface, ArrayAccess
         'folio_consulta' => 'folioConsulta',
         'folio_consulta_otorgante' => 'folioConsultaOtorgante',
         'clave_otorgante' => 'claveOtorgante',
+        'declaraciones_consumidor' => 'declaracionesConsumidor',
         'persona' => 'persona',
         'consultas' => 'consultas',
         'creditos' => 'creditos',
@@ -64,6 +67,7 @@ class Respuesta implements ModelInterface, ArrayAccess
         'folio_consulta' => 'setFolioConsulta',
         'folio_consulta_otorgante' => 'setFolioConsultaOtorgante',
         'clave_otorgante' => 'setClaveOtorgante',
+        'declaraciones_consumidor' => 'setDeclaracionesConsumidor',
         'persona' => 'setPersona',
         'consultas' => 'setConsultas',
         'creditos' => 'setCreditos',
@@ -77,6 +81,7 @@ class Respuesta implements ModelInterface, ArrayAccess
         'folio_consulta' => 'getFolioConsulta',
         'folio_consulta_otorgante' => 'getFolioConsultaOtorgante',
         'clave_otorgante' => 'getClaveOtorgante',
+        'declaraciones_consumidor' => 'getDeclaracionesConsumidor',
         'persona' => 'getPersona',
         'consultas' => 'getConsultas',
         'creditos' => 'getCreditos',
@@ -115,6 +120,7 @@ class Respuesta implements ModelInterface, ArrayAccess
         $this->container['folio_consulta'] = isset($data['folio_consulta']) ? $data['folio_consulta'] : null;
         $this->container['folio_consulta_otorgante'] = isset($data['folio_consulta_otorgante']) ? $data['folio_consulta_otorgante'] : null;
         $this->container['clave_otorgante'] = isset($data['clave_otorgante']) ? $data['clave_otorgante'] : null;
+        $this->container['declaraciones_consumidor'] = isset($data['declaraciones_consumidor']) ? $data['declaraciones_consumidor'] : null;
         $this->container['persona'] = isset($data['persona']) ? $data['persona'] : null;
         $this->container['consultas'] = isset($data['consultas']) ? $data['consultas'] : null;
         $this->container['creditos'] = isset($data['creditos']) ? $data['creditos'] : null;
@@ -127,6 +133,9 @@ class Respuesta implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+        if (!is_null($this->container['declaraciones_consumidor']) && (mb_strlen($this->container['declaraciones_consumidor']) > 100)) {
+            $invalidProperties[] = "invalid value for 'declaraciones_consumidor', the character length must be smaller than or equal to 100.";
+        }
         return $invalidProperties;
     }
     
@@ -165,6 +174,20 @@ class Respuesta implements ModelInterface, ArrayAccess
     public function setClaveOtorgante($clave_otorgante)
     {
         $this->container['clave_otorgante'] = $clave_otorgante;
+        return $this;
+    }
+    
+    public function getDeclaracionesConsumidor()
+    {
+        return $this->container['declaraciones_consumidor'];
+    }
+    
+    public function setDeclaracionesConsumidor($declaraciones_consumidor)
+    {
+        if (!is_null($declaraciones_consumidor) && (mb_strlen($declaraciones_consumidor) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $declaraciones_consumidor when calling Respuesta., must be smaller than or equal to 100.');
+        }
+        $this->container['declaraciones_consumidor'] = $declaraciones_consumidor;
         return $this;
     }
     
