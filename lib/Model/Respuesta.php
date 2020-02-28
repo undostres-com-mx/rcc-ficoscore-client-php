@@ -16,7 +16,7 @@ class Respuesta implements ModelInterface, ArrayAccess
         'folio_consulta_otorgante' => 'string',
         'clave_otorgante' => 'string',
         'declaraciones_consumidor' => 'string',
-        'persona' => '\RCCFicoScore\Client\Model\PersonasRespuesta',
+        'persona' => '\RCCFicoScore\Client\Model\PersonaRespuesta',
         'consultas' => '\RCCFicoScore\Client\Model\Consulta[]',
         'creditos' => '\RCCFicoScore\Client\Model\Credito[]',
         'domicilios' => '\RCCFicoScore\Client\Model\DomicilioRespuesta[]',
