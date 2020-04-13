@@ -1,4 +1,4 @@
-# Reporte de crédito consolidado con FICO® Score
+# rcc-ficoscore-client-php
 
 Este reporte muestra el historial crediticio con los Campos Asociados a Nómina, el cumplimiento de pago de los compromisos que la persona ha adquirido con entidades financieras, no financieras e instituciones comerciales que dan crédito o participan en actividades afines al crédito.
 ## Requisitos
@@ -22,7 +22,7 @@ Ejecutar: `composer install`
 ### Paso 1. Generar llave y certificado
 - Se tiene que tener un contenedor en formato PKCS12.
 - En caso de no contar con uno, ejecutar las instrucciones contenidas en **lib/Interceptor/key_pair_gen.sh** ó con los siguientes comandos.
-- **opcional**: Para cifrar el contenedor, colocar una contraseña en una variable de ambiente.
+**opcional**: Para cifrar el contenedor, colocar una contraseña en una variable de ambiente.
 ```sh
 export KEY_PASSWORD=your_password
 ```
