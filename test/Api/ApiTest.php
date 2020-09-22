@@ -2,15 +2,17 @@
 namespace RCCFicoScore\Client;
 
 use \GuzzleHttp\Client;
-use \GuzzleHttp\Event\Emitter;
-use \GuzzleHttp\Middleware;
 use \GuzzleHttp\HandlerStack as handlerStack;
 
+use \RCCFicoScore\Client\Api\RCCFicoScoreApi;
 use \RCCFicoScore\Client\ApiException;
 use \RCCFicoScore\Client\Configuration;
-use \RCCFicoScore\Client\Model\Error;
-use \RCCFicoScore\Client\Interceptor\KeyHandler;
-use \RCCFicoScore\Client\Interceptor\MiddlewareEvents;
+use RCCFicoScore\Client\Model\CatalogoEstados;
+use RCCFicoScore\Client\Model\PersonaPeticion;
+use RCCFicoScore\Client\Model\DomicilioPeticion;
+
+use Signer\Manager\Interceptor\MiddlewareEvents;
+use Signer\Manager\Interceptor\KeyHandler;
 
 class RCCFicoScoreApiTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,18 +20,18 @@ class RCCFicoScoreApiTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $password = getenv('KEY_PASSWORD');
-        $this->signer = new \RCCFicoScore\Client\Interceptor\KeyHandler(null, null, $password);
+        $this->signer = new KeyHandler(null, null, $password);
 
-        $events = new \RCCFicoScore\Client\Interceptor\MiddlewareEvents($this->signer);
+        $events = new MiddlewareEvents($this->signer);
         $handler = handlerStack::create();
         $handler->push($events->add_signature_header('x-signature'));
         $handler->push($events->verify_signature_header('x-signature'));
-        $client = new \GuzzleHttp\Client(['handler' => $handler]);
+        $client = new Client(['handler' => $handler]);
 
-        $config = new \RCCFicoScore\Client\Configuration();
+        $config = new Configuration();
         $config->setHost('the_url');
         
-        $this->apiInstance = new \RCCFicoScore\Client\Api\RCCFicoScoreApi($client, $config);
+        $this->apiInstance = new RCCFicoScoreApi($client, $config);
         $this->x_api_key = "your_api_key";
         $this->username = "your_username";
         $this->password = "your_password";
@@ -38,9 +40,9 @@ class RCCFicoScoreApiTest extends \PHPUnit_Framework_TestCase
 
     public function testGetReporte()
     {
-        $estado = new \RCCFicoScore\Client\Model\CatalogoEstados();
-        $request = new \RCCFicoScore\Client\Model\PersonaPeticion();
-        $domicilio = new \RCCFicoScore\Client\Model\DomicilioPeticion();
+        $estado = new CatalogoEstados();
+        $request = new PersonaPeticion();
+        $domicilio = new DomicilioPeticion();
 
         $request->setApellidoPaterno("PATERNO");
         $request->setApellidoMaterno("MATERNO");
@@ -76,12 +78,12 @@ class RCCFicoScoreApiTest extends \PHPUnit_Framework_TestCase
             print_r($result);
             $this->assertTrue($result->getFolioConsulta()!==null);
             return $result->getFolioConsulta();
-        } catch (Exception $e) {
+        } catch (ApiException $e) {
             echo 'Exception when calling RCCFicoScoreApi->getReporte: ', $e->getMessage(), PHP_EOL;
         }
-    } 
+    }
 
-   /**
+    /**
      * @depends testGetReporte
      */    
     public function testGetConsultas($folioConsulta)
@@ -92,7 +94,7 @@ class RCCFicoScoreApiTest extends \PHPUnit_Framework_TestCase
                 $this->signer->close();
                 print_r($result);
                 $this->assertTrue($result->getConsultas()!==null);
-            } catch (Exception $e) {
+            } catch (ApiException $e) {
                 echo 'Exception when calling RCCFicoScoreApi->testGetConsultas: ', $e->getMessage(), PHP_EOL;
             }
         } else {
@@ -111,7 +113,7 @@ class RCCFicoScoreApiTest extends \PHPUnit_Framework_TestCase
                 $this->signer->close();
                 print_r($result);
                 $this->assertTrue($result->getCreditos()!==null);
-            } catch (Exception $e) {
+            } catch (ApiException $e) {
                 echo 'Exception when calling RCCFicoScoreApi->testGetCreditos: ', $e->getMessage(), PHP_EOL;
             }
         } else {
@@ -130,7 +132,7 @@ class RCCFicoScoreApiTest extends \PHPUnit_Framework_TestCase
                 $this->signer->close();
                 print_r($result);
                 $this->assertTrue($result->getDomicilios()!==null);
-            } catch (Exception $e) {
+            } catch (ApiException $e) {
                 echo 'Exception when calling RCCFicoScoreApi->testGetDomicilios: ', $e->getMessage(), PHP_EOL;
             }
         } else {
@@ -149,7 +151,7 @@ class RCCFicoScoreApiTest extends \PHPUnit_Framework_TestCase
                 $this->signer->close();
                 print_r($result);
                 $this->assertTrue($result->getEmpleos()!==null);
-            } catch (Exception $e) {
+            } catch (ApiException $e) {
                 echo 'Exception when calling RCCFicoScoreApi->testGetEmpleos: ', $e->getMessage(), PHP_EOL;
             }
         } else {
@@ -168,7 +170,7 @@ class RCCFicoScoreApiTest extends \PHPUnit_Framework_TestCase
                 $this->signer->close();
                 print_r($result);
                 $this->assertTrue($result->getScores()!==null);
-            } catch (Exception $e) {
+            } catch (ApiException $e) {
                 echo 'Exception when calling RCCFicoScoreApi->testGetScores: ', $e->getMessage(), PHP_EOL;
             }
         } else {
@@ -187,11 +189,11 @@ class RCCFicoScoreApiTest extends \PHPUnit_Framework_TestCase
                 $this->signer->close();
                 print_r($result);
                 $this->assertTrue($result->getMensajes()!==null);
-            } catch (Exception $e) {
+            } catch (ApiException $e) {
                 echo 'Exception when calling RCCFicoScoreApi->testGetMensajes: ', $e->getMessage(), PHP_EOL;
             }
         } else {
             print_r("x_full_report inicializado en true");
         }         
-    }    
+    }
 }
