@@ -19,7 +19,7 @@ class Credito implements ModelInterface, ArrayAccess
         'cuenta_actual' => 'string',
         'tipo_responsabilidad' => '\RCCFicoScore\Client\Model\CatalogoTipoResponsabilidad',
         'tipo_cuenta' => '\RCCFicoScore\Client\Model\CatalogoTipoCuenta',
-        'tipo_credito' => '\RCCFicoScore\Client\Model\CatalogoTipoCredito',
+        'tipo_credito' => 'string',
         'clave_unidad_monetaria' => '\RCCFicoScore\Client\Model\CatalogoMoneda',
         'valor_activo_valuacion' => 'int',
         'numero_pagos' => 'int',
