@@ -99,12 +99,8 @@ $this->signer = new \RCCFicoScore\Client\Interceptor\KeyHandler(
  $config->setHost('the_url');
  ```
  
-### Paso 5. Reporte completo o segmentado
- Modificar la variable en ***test/Api/ApiTest.php*** (false si es segmentado o true para reporte completo) en la línea 36, como se muestra en el siguiente fragmento de código:
- ```php
-$this->x_full_report = 'false';
- ```
-### Paso 6. Capturar los datos de la petición
+
+### Paso 5. Capturar los datos de la petición
 
 Es importante contar con el setUp() que se encargará de firmar y verificar la petición.
 
@@ -127,7 +123,7 @@ public function setUp()
     $this->x_api_key = "your_api_key";
     $this->username = "your_username";
     $this->password = "your_password";
-    $this->x_full_report = 'false';    
+     
 }
 
 public function testGetReporte()
@@ -165,7 +161,7 @@ public function testGetReporte()
     $request->setDomicilio($domicilio);
 
     try {
-        $result = $this->apiInstance->getReporte($this->x_api_key, $this->username, $this->password, $request, $this->x_full_report);
+        $result = $this->apiInstance->getReporte($this->x_api_key, $this->username, $this->password, $request);
         $this->signer->close();
         print_r($result);
         $this->assertTrue($result->getFolioConsulta()!==null);
@@ -181,4 +177,9 @@ Para ejecutar las pruebas unitarias:
 ```sh
 ./vendor/bin/phpunit
 ```
+
+
+---
+[CONDICIONES DE USO, REPRODUCCIÓN Y DISTRIBUCIÓN](https://github.com/APIHub-CdC/licencias-cdc)
+
 [1]: https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos
